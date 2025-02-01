@@ -19,7 +19,7 @@ ENTRYPOINT [ "node", "index.js" ]
 
 # 도커 이미지 생성 CLI (참고: https://docs.docker.com/engine/reference/commandline/build)
 # docker build -f Dockerfile -t [image name] .
-# - f: 도커 빌드 파일 (Dockerfile)
+# - f: 도커 빌드 파일 명시 (Dockerfile)
 # - t: 도커 이미지명
 # - .: 도커가 빌드할 원본 파일들 위치 (최상위)
 
@@ -47,3 +47,10 @@ ENTRYPOINT [ "node", "index.js" ]
 # docker push [도커 계정]/[이미지명 혹은 레포지토리명]:[태그]
 # Ex. docker push withbbang/docker-tutorial:latest
 # 참고: withbbang/docker-tutorial:latest와 동일한 이미지를 생성해야한다. -> docker tag docker-tutorial:latest withbbang/docker-tutorial:latest
+
+# 도커 빌드 부터 푸시까지 순서
+# 1. Dockerfile 만들기
+# 2. docker build -f Dockerfile -t [image name] .
+# 3. docker hub에서 레포지토리 만들기
+# 4. docker tag [이미지명]:[태그] [도커 계정]/[이미지명 혹은 레포지토리명]:[태그]
+# 5. docker push [도커 계정]/[이미지명 혹은 레포지토리명]:[태그]
