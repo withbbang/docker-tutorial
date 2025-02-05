@@ -1,21 +1,21 @@
 # 노드 버전
 FROM node:20-alpine
 
-# 카피할 원본 파일 위치
+# 컨테이너 내부 작업 디렉터리로 이동
 WORKDIR /app
 
-# 카피할 파일 -> 수정 빈도가 적을수록 위에 기재
+# 컨테이너 내부로 의존성 파일 복사 (수정 빈도가 적을수록 위에 기재)
 COPY package*.json ./
 
 # install은 의존성에 같은 버전이라도 가장 최신 버전을 설치하지만 ci는 package-lock에 기재돼있는 동일한 버전으로 설치
 # RUN npm install
 RUN npm ci
 
-# 자주 수정되는 파일들은 아래에 기재
-COPY src ./
+# 호스트 머신의 현재 디렉터리 파일들을 컨테이너 내부로 전부 복사
+COPY . .
 
 # 마지막으로 cli에 입력돼서 실행되는 것들 (Ex. $ node index.js)
-ENTRYPOINT [ "node", "index.js" ]
+ENTRYPOINT [ "node", "src/index.js" ]
 
 # 도커 이미지 생성 CLI (참고: https://docs.docker.com/engine/reference/commandline/build)
 # docker build -f Dockerfile -t [image name] .
