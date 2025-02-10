@@ -51,6 +51,8 @@ ENTRYPOINT [ "node", "src/index.js" ]
 # 도커 이미지 빌드 부터 푸시까지 순서
 # 1. Dockerfile 만들기
 # 2. docker build -f Dockerfile -t [image name] .
+# rf) Mac 칩에서는 cpu 칩 호환 문제로 다르게 빌드해야한다.
+# rf) docker buildx build --platform=linux/amd64,linux/arm64 -f Dockerfile -t [image name] .
 # 3. docker hub에서 레포지토리 만들기
 # 4. docker tag [이미지명]:[태그] [도커 계정]/[이미지명 혹은 레포지토리명]:[태그]
 # 5. docker push [도커 계정]/[이미지명 혹은 레포지토리명]:[태그]
